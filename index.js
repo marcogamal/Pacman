@@ -5,6 +5,8 @@ canvas.width = innerWidth
 canvas.height = innerHeight
 
 class Boundary {
+  static width = 40
+  static height = 40
   constructor({position}) {
     this.position = position
     this.width = 40
@@ -20,6 +22,7 @@ class Boundary {
 const map = [
   ['-','-','-','-','-','-'],
   ['-',' ',' ',' ',' ','-'],
+  ['-',' ','-','-',' ','-'],
   ['-',' ',' ',' ',' ','-'],
   ['-','-','-','-','-','-'],
 ]
@@ -31,8 +34,8 @@ map.forEach((row, i) => {
       case '-': 
       boundaries.push(new Boundary({
         position: {
-          x: 40 * j,
-          y: 40 * i
+          x: Boundary.width * j,
+          y: Boundary.height * i
         }
       })
       )
