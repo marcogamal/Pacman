@@ -67,7 +67,7 @@ const keys = {
   },
 };
 
-let lastKey = ''
+let lastKey = "";
 
 const map = [
   ["-", "-", "-", "-", "-", "-"],
@@ -94,16 +94,31 @@ map.forEach((row, i) => {
   });
 });
 
+function circleCollidesWithRectangle({circle, rectangle}) {
+  return (player.position.y - player.radius + player.velocity.y <=
+        boundary.position.y + boundary.height &&
+      player.position.x + player.radius + player.velocity.x >= boundary.position.x &&
+      player.position.y + player.radius + player.velocity.y >= boundary.position.y &&
+      player.position.x - player.radius + player.velocity.x <= boundary.position.x + boundary.width
+  )
+}
+
 function animate() {
   requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
   boundaries.forEach((boundary) => {
     boundary.draw();
 
-    if (player.position.y - player.radius <= boundary.position.y + boundary.height && player.position.x + player.radius >= boundary.position.x && player.position.y + player.radius >= boundary.position.y && player.position.x - player.radius <= boundary.position.x + boundary.width) {
-      console.log('col')
-      player.velocity.x = 0
-      player.velocity.y = 0
+    if (
+      player.position.y - player.radius + player.velocity.y <=
+        boundary.position.y + boundary.height &&
+      player.position.x + player.radius + player.velocity.x >= boundary.position.x &&
+      player.position.y + player.radius + player.velocity.y >= boundary.position.y &&
+      player.position.x - player.radius + player.velocity.x <= boundary.position.x + boundary.width
+    ) {
+      console.log("col");
+      player.velocity.x = 0;
+      player.velocity.y = 0;
     }
   });
 
@@ -111,13 +126,13 @@ function animate() {
   // player.velocity.y = 0;
   // player.velocity.x = 0;
 
-  if (keys.w.pressed && lastKey === 'w') {
+  if (keys.w.pressed && lastKey === "w") {
     player.velocity.y = -5;
-  } else if (keys.a.pressed && lastKey === 'a') {
+  } else if (keys.a.pressed && lastKey === "a") {
     player.velocity.x = -5;
-  } else if (keys.s.pressed && lastKey === 's') {
+  } else if (keys.s.pressed && lastKey === "s") {
     player.velocity.y = 5;
-  } else if (keys.d.pressed && lastKey === 'd') {
+  } else if (keys.d.pressed && lastKey === "d") {
     player.velocity.x = 5;
   }
 }
@@ -147,19 +162,19 @@ window.addEventListener("keydown", ({ key }) => {
   switch (key) {
     case "w":
       keys.w.pressed = true;
-      lastKey = 'w'
+      lastKey = "w";
       break;
     case "a":
       keys.a.pressed = true;
-      lastKey = 'a'
+      lastKey = "a";
       break;
     case "s":
       keys.s.pressed = true;
-      lastKey = 's'
+      lastKey = "s";
       break;
     case "d":
       keys.d.pressed = true;
-      lastKey = 'd'
+      lastKey = "d";
       break;
   }
 });
