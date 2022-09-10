@@ -70,11 +70,11 @@ const keys = {
 let lastKey = "";
 
 const map = [
-  ["-", "-", "-", "-", "-", "-"],
-  ["-", " ", " ", " ", " ", "-"],
-  ["-", " ", "-", "-", " ", "-"],
-  ["-", " ", " ", " ", " ", "-"],
-  ["-", "-", "-", "-", "-", "-"],
+  ["-", "-", "-", "-", "-", "-", "-"],
+  ["-", " ", " ", " ", " ", " ", "-"],
+  ["-", " ", "-", " ", "-", " ", "-"],
+  ["-", " ", " ", " ", " ", " ", "-"],
+  ["-", "-", "-", "-", "-", "-", "-"],
 ];
 
 map.forEach((row, i) => {
@@ -94,12 +94,14 @@ map.forEach((row, i) => {
   });
 });
 
-function circleCollidesWithRectangle({circle, rectangle}) {
-  return (player.position.y - player.radius + player.velocity.y <=
-        boundary.position.y + boundary.height &&
-      player.position.x + player.radius + player.velocity.x >= boundary.position.x &&
-      player.position.y + player.radius + player.velocity.y >= boundary.position.y &&
-      player.position.x - player.radius + player.velocity.x <= boundary.position.x + boundary.width
+function circleCollidesWithRectangle({
+  circle, 
+  rectangle}) {
+  return (circle.position.y - circle.radius + circle.velocity.y <=
+        rectangle.position.y + rectangle.height &&
+      circle.position.x + circle.radius + circle.velocity.x >= rectangle.position.x &&
+      circle.position.y + circle.radius + circle.velocity.y >= rectangle.position.y &&
+      circle.position.x - circle.radius + circle.velocity.x <= rectangle.position.x + rectangle.width
   )
 }
 
