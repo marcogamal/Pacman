@@ -94,15 +94,17 @@ map.forEach((row, i) => {
   });
 });
 
-function circleCollidesWithRectangle({
-  circle, 
-  rectangle}) {
-  return (circle.position.y - circle.radius + circle.velocity.y <=
-        rectangle.position.y + rectangle.height &&
-      circle.position.x + circle.radius + circle.velocity.x >= rectangle.position.x &&
-      circle.position.y + circle.radius + circle.velocity.y >= rectangle.position.y &&
-      circle.position.x - circle.radius + circle.velocity.x <= rectangle.position.x + rectangle.width
-  )
+function circleCollidesWithRectangle({ circle, rectangle }) {
+  return (
+    circle.position.y - circle.radius + circle.velocity.y <=
+      rectangle.position.y + rectangle.height &&
+    circle.position.x + circle.radius + circle.velocity.x >=
+      rectangle.position.x &&
+    circle.position.y + circle.radius + circle.velocity.y >=
+      rectangle.position.y &&
+    circle.position.x - circle.radius + circle.velocity.x <=
+      rectangle.position.x + rectangle.width
+  );
 }
 
 function animate() {
@@ -112,11 +114,10 @@ function animate() {
     boundary.draw();
 
     if (
-      player.position.y - player.radius + player.velocity.y <=
-        boundary.position.y + boundary.height &&
-      player.position.x + player.radius + player.velocity.x >= boundary.position.x &&
-      player.position.y + player.radius + player.velocity.y >= boundary.position.y &&
-      player.position.x - player.radius + player.velocity.x <= boundary.position.x + boundary.width
+      circleCollidesWithRectangle({
+        circle: player,
+        rectangle: boundary,
+      })
     ) {
       console.log("col");
       player.velocity.x = 0;
@@ -129,7 +130,18 @@ function animate() {
   // player.velocity.x = 0;
 
   if (keys.w.pressed && lastKey === "w") {
-    player.velocity.y = -5;
+    boundaries.forEach((boundary) => {
+      if (
+        circleCollidesWithRectangle({
+          circle: player,
+          rectangle: boundary,
+        })
+      ) {
+        player.velocity.y = 0;
+      } else {
+        player.velocity.y = -5;
+      }
+    });
   } else if (keys.a.pressed && lastKey === "a") {
     player.velocity.x = -5;
   } else if (keys.s.pressed && lastKey === "s") {
