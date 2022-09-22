@@ -72,13 +72,13 @@ const keys = {
 let lastKey = "";
 
 const map = [
-  ["-", "-", "-", "-", "-", "-", "-"],
+  ["1", "-", "-", "-", "-", "-", "2"],
   ["|", " ", " ", " ", " ", " ", "|"],
   ["|", " ", "-", " ", "-", " ", "|"],
   ["|", " ", " ", " ", " ", " ", "|"],
   ["|", " ", "-", " ", "-", " ", "|"],
   ["|", " ", " ", " ", " ", " ", "|"],
-  ["-", "-", "-", "-", "-", "-", "-"],
+  ["4", "-", "-", "-", "-", "-", "3"],
 ];
 
 function createImage(src) {
@@ -112,6 +112,50 @@ map.forEach((row, i) => {
           })
         );
         break;
+        case "1":
+          boundaries.push(
+            new Boundary({
+              position: {
+                x: Boundary.width * j,
+                y: Boundary.height * i,
+              },
+              image: createImage('./img/pipeCorner1.png')
+            })
+          );
+          break;
+          case "2":
+            boundaries.push(
+              new Boundary({
+                position: {
+                  x: Boundary.width * j,
+                  y: Boundary.height * i,
+                },
+                image: createImage('./img/pipeCorner2.png')
+              })
+            );
+            break;
+            case "3":
+              boundaries.push(
+                new Boundary({
+                  position: {
+                    x: Boundary.width * j,
+                    y: Boundary.height * i,
+                  },
+                  image: createImage('./img/pipeCorner3.png')
+                })
+              );
+              break;
+              case "4":
+                boundaries.push(
+                  new Boundary({
+                    position: {
+                      x: Boundary.width * j,
+                      y: Boundary.height * i,
+                    },
+                    image: createImage('./img/pipeCorner4.png')
+                  })
+                );
+                break;
     }
   });
 });
