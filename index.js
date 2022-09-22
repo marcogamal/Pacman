@@ -73,13 +73,19 @@ let lastKey = "";
 
 const map = [
   ["-", "-", "-", "-", "-", "-", "-"],
-  ["-", " ", " ", " ", " ", " ", "-"],
-  ["-", " ", "-", " ", "-", " ", "-"],
-  ["-", " ", " ", " ", " ", " ", "-"],
-  ["-", " ", "-", " ", "-", " ", "-"],
-  ["-", " ", " ", " ", " ", " ", "-"],
+  ["|", " ", " ", " ", " ", " ", "|"],
+  ["|", " ", "-", " ", "-", " ", "|"],
+  ["|", " ", " ", " ", " ", " ", "|"],
+  ["|", " ", "-", " ", "-", " ", "|"],
+  ["|", " ", " ", " ", " ", " ", "|"],
   ["-", "-", "-", "-", "-", "-", "-"],
 ];
+
+function createImage(src) {
+const image = new Image()
+image.src = src
+return image
+}
 
 map.forEach((row, i) => {
   row.forEach((symbol, j) => {
@@ -91,7 +97,18 @@ map.forEach((row, i) => {
               x: Boundary.width * j,
               y: Boundary.height * i,
             },
-            image: image
+            image: createImage('./img/pipeHorizontal.png')
+          })
+        );
+        break;
+        case "|":
+        boundaries.push(
+          new Boundary({
+            position: {
+              x: Boundary.width * j,
+              y: Boundary.height * i,
+            },
+            image: createImage('./img/pipeVertical.png')
           })
         );
         break;
