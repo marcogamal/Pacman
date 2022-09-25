@@ -189,6 +189,39 @@ map.forEach((row, i) => {
           })
         );
         break;
+      case "_":
+        boundaries.push(
+          new Boundary({
+            position: {
+              x: Boundary.width * j,
+              y: Boundary.height * i,
+            },
+            image: createImage("./img/capBottom.png"),
+          })
+        );
+        break;
+      case "^":
+        boundaries.push(
+          new Boundary({
+            position: {
+              x: Boundary.width * j,
+              y: Boundary.height * i,
+            },
+            image: createImage("./img/capTop.png"),
+          })
+        );
+        break;
+        case "+":
+        boundaries.push(
+          new Boundary({
+            position: {
+              x: Boundary.width * j,
+              y: Boundary.height * i,
+            },
+            image: createImage("./img/pipeCross.png"),
+          })
+        );
+        break;
     }
   });
 });
