@@ -222,6 +222,28 @@ map.forEach((row, i) => {
           })
         );
         break;
+        case "5":
+          boundaries.push(
+            new Boundary({
+              position: {
+                x: Boundary.width * j,
+                y: Boundary.height * i,
+              },
+              image: createImage("./img/pipeConnectorTop.png"),
+            })
+          );
+          break;
+          case "6":
+            boundaries.push(
+              new Boundary({
+                position: {
+                  x: Boundary.width * j,
+                  y: Boundary.height * i,
+                },
+                image: createImage("./img/pipeConnectorRight.png"),
+              })
+            );
+            break;
     }
   });
 });
