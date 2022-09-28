@@ -72,10 +72,16 @@ const keys = {
 let lastKey = "";
 
 const map = [
-  ["1", "-", "-", "-", "-", "-", "2"],
+  ["1", "-", "-", "-", "-", "-", "-", "-", "-", "-", "2"],
+  ["|", ".", ".", ".", ".", ".", ".", ".", ".", ".", "|"],
+  ["|", ".", "b", " ", ".", ".", ".", ".", "b", ".", "|"],
   ["|", " ", " ", " ", " ", " ", "|"],
-  ["|", " ", "b", " ", "b", " ", "|"],
-  ["|", " ", " ", " ", " ", " ", "|"],
+  ["|",
+  ["|",
+  ["|",
+  ["|",
+  ["|",
+  ["|",
   ["|", " ", "b", " ", "b", " ", "|"],
   ["|", " ", " ", " ", " ", " ", "|"],
   ["4", "-", "-", "-", "-", "-", "3"],
@@ -244,6 +250,28 @@ map.forEach((row, i) => {
               })
             );
             break;
+            case "7":
+              boundaries.push(
+                new Boundary({
+                  position: {
+                    x: Boundary.width * j,
+                    y: Boundary.height * i,
+                  },
+                  image: createImage("./img/pipeConnectorBottom.png"),
+                })
+              );
+              break;
+              case "6":
+                boundaries.push(
+                  new Boundary({
+                    position: {
+                      x: Boundary.width * j,
+                      y: Boundary.height * i,
+                    },
+                    image: createImage("./img/pipeConnectorLeft.png"),
+                  })
+                );
+                break;
     }
   });
 });
