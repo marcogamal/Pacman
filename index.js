@@ -292,8 +292,8 @@ map.forEach((row, i) => {
                   pellets.push(
                     new Pellet({
                       position: {
-                        x: Boundary.width * j,
-                        y: Boundary.height * i,
+                        x: Boundary.width * j + Boundary.width /2,
+                        y: Boundary.height * i + Boundary.height /2,
                       },
                     })
                   );
@@ -318,6 +318,11 @@ function circleCollidesWithRectangle({ circle, rectangle }) {
 function animate() {
   requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
+
+pellets.forEach((pellet) => {
+  pellet.draw()
+})
+
   boundaries.forEach((boundary) => {
     boundary.draw();
 
