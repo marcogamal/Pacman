@@ -395,6 +395,24 @@ for (let i = pellets.length -1; 0 < i; i--) {
   // player.velocity.x = 0;
   ghosts.forEach(ghost => {
     ghost.update()
+
+    const collisions = []
+    boundaries.forEach(boundary => {
+      if (
+        circleCollidesWithRectangle({
+          circle: {
+            ...player,
+            velocity: {
+              x: 5,
+              y: 0,
+            },
+          },
+          rectangle: boundary,
+        })
+      ) {
+         collisions.push('right')
+    }
+  })
   })
 
   if (keys.w.pressed && lastKey === "w") {
