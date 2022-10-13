@@ -401,7 +401,7 @@ for (let i = pellets.length -1; 0 < i; i--) {
       if (
         circleCollidesWithRectangle({
           circle: {
-            ...player,
+            ...ghost,
             velocity: {
               x: 5,
               y: 0,
@@ -412,6 +412,51 @@ for (let i = pellets.length -1; 0 < i; i--) {
       ) {
          collisions.push('right')
     }
+
+    if (
+      circleCollidesWithRectangle({
+        circle: {
+          ...ghost,
+          velocity: {
+            x: -5,
+            y: 0,
+          },
+        },
+        rectangle: boundary,
+      })
+    ) {
+       collisions.push('right')
+  }
+
+  if (
+    circleCollidesWithRectangle({
+      circle: {
+        ...ghost,
+        velocity: {
+          x: 0,
+          y: -5,
+        },
+      },
+      rectangle: boundary,
+    })
+  ) {
+     collisions.push('up')
+}
+
+if (
+  circleCollidesWithRectangle({
+    circle: {
+      ...ghost,
+      velocity: {
+        x: 0,
+        y: 5,
+      },
+    },
+    rectangle: boundary,
+  })
+) {
+   collisions.push('down')
+}
   })
   })
 
