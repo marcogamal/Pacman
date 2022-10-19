@@ -51,6 +51,7 @@ class Ghost {
     this.velocity = velocity;
     this.radius = 15;
     this.color = color
+    this.prevCollisions = []
   }
 
   draw() {
@@ -399,6 +400,7 @@ for (let i = pellets.length -1; 0 < i; i--) {
     const collisions = []
     boundaries.forEach(boundary => {
       if (
+        !collisions.includes('right') &&
         circleCollidesWithRectangle({
           circle: {
             ...ghost,
@@ -414,6 +416,7 @@ for (let i = pellets.length -1; 0 < i; i--) {
     }
 
     if (
+      !collisions.includes('left') &&
       circleCollidesWithRectangle({
         circle: {
           ...ghost,
@@ -425,10 +428,11 @@ for (let i = pellets.length -1; 0 < i; i--) {
         rectangle: boundary,
       })
     ) {
-       collisions.push('right')
+       collisions.push('left')
   }
 
   if (
+    !collisions.includes('up') &&
     circleCollidesWithRectangle({
       circle: {
         ...ghost,
@@ -444,6 +448,7 @@ for (let i = pellets.length -1; 0 < i; i--) {
 }
 
 if (
+  !collisions.includes('down') &&
   circleCollidesWithRectangle({
     circle: {
       ...ghost,
@@ -458,6 +463,10 @@ if (
    collisions.push('down')
 }
   })
+  if (collisions.length > ghost.prevCollisions.length) {
+    ghost.prevCollisions = collisions
+  }
+  console.log(collisions)
   })
 
   if (keys.w.pressed && lastKey === "w") {
