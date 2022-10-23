@@ -488,6 +488,28 @@ function animate() {
     console.log({ pathways });
 
     const direction = pathways[Math.floor(Math.random() * pathways.length)];
+    switch (direction) {
+      case "down":
+        ghost.velocity.y = 5;
+        ghost.velocity.x = 0;
+        break;
+
+      case "up":
+        ghost.velocity.y = -5;
+        ghost.velocity.x = 0;
+        break;
+
+      case "right":
+        ghost.velocity.y = 0;
+        ghost.velocity.x = 0;
+        break;
+
+      case "left":
+        ghost.velocity.y = 0;
+        ghost.velocity.x = 0;
+        break;
+    }
+    ghost.prevCollisions = [];
   });
 
   if (keys.w.pressed && lastKey === "w") {
