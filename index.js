@@ -1,7 +1,7 @@
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
 
-const scoreEl = document.querySelector("#scoreEL")
+const scoreEl = document.querySelector("#scoreEL");
 
 canvas.width = innerWidth;
 canvas.height = innerHeight;
@@ -46,12 +46,12 @@ class Player {
 }
 
 class Ghost {
-  constructor({ position, velocity, color = 'red' }) {
+  constructor({ position, velocity, color = "red" }) {
     this.position = position;
     this.velocity = velocity;
     this.radius = 15;
-    this.color = color
-    this.prevCollisions = []
+    this.color = color;
+    this.prevCollisions = [];
   }
 
   draw() {
@@ -84,20 +84,20 @@ class Pellet {
   }
 }
 
-const pellets = []
+const pellets = [];
 const boundaries = [];
 const ghosts = [
   new Ghost({
     position: {
-      x: Boundary.width *6 + Boundary.width / 2,
+      x: Boundary.width * 6 + Boundary.width / 2,
       y: Boundary.height + Boundary.height / 2,
     },
     velocity: {
       x: 0,
-      y: 0
-    }
-  })
-]
+      y: 0,
+    },
+  }),
+];
 const player = new Player({
   position: {
     x: Boundary.width + Boundary.width / 2,
@@ -124,7 +124,7 @@ const keys = {
 };
 
 let lastKey = "";
-let score = 0
+let score = 0;
 
 const map = [
   ["1", "-", "-", "-", "-", "-", "-", "-", "-", "-", "2"],
@@ -272,7 +272,7 @@ map.forEach((row, i) => {
           })
         );
         break;
-        case "+":
+      case "+":
         boundaries.push(
           new Boundary({
             position: {
@@ -283,60 +283,60 @@ map.forEach((row, i) => {
           })
         );
         break;
-        case "5":
-          boundaries.push(
-            new Boundary({
-              position: {
-                x: Boundary.width * j,
-                y: Boundary.height * i,
-              },
-              image: createImage("./img/pipeConnectorTop.png"),
-            })
-          );
-          break;
-          case "6":
-            boundaries.push(
-              new Boundary({
-                position: {
-                  x: Boundary.width * j,
-                  y: Boundary.height * i,
-                },
-                image: createImage("./img/pipeConnectorRight.png"),
-              })
-            );
-            break;
-            case "7":
-              boundaries.push(
-                new Boundary({
-                  position: {
-                    x: Boundary.width * j,
-                    y: Boundary.height * i,
-                  },
-                  image: createImage("./img/pipeConnectorBottom.png"),
-                })
-              );
-              break;
-              case "8":
-                boundaries.push(
-                  new Boundary({
-                    position: {
-                      x: Boundary.width * j,
-                      y: Boundary.height * i,
-                    },
-                    image: createImage("./img/pipeConnectorLeft.png"),
-                  })
-                );
-                break;
-                case ".":
-                  pellets.push(
-                    new Pellet({
-                      position: {
-                        x: Boundary.width * j + Boundary.width /2,
-                        y: Boundary.height * i + Boundary.height /2,
-                      },
-                    })
-                  );
-                  break;
+      case "5":
+        boundaries.push(
+          new Boundary({
+            position: {
+              x: Boundary.width * j,
+              y: Boundary.height * i,
+            },
+            image: createImage("./img/pipeConnectorTop.png"),
+          })
+        );
+        break;
+      case "6":
+        boundaries.push(
+          new Boundary({
+            position: {
+              x: Boundary.width * j,
+              y: Boundary.height * i,
+            },
+            image: createImage("./img/pipeConnectorRight.png"),
+          })
+        );
+        break;
+      case "7":
+        boundaries.push(
+          new Boundary({
+            position: {
+              x: Boundary.width * j,
+              y: Boundary.height * i,
+            },
+            image: createImage("./img/pipeConnectorBottom.png"),
+          })
+        );
+        break;
+      case "8":
+        boundaries.push(
+          new Boundary({
+            position: {
+              x: Boundary.width * j,
+              y: Boundary.height * i,
+            },
+            image: createImage("./img/pipeConnectorLeft.png"),
+          })
+        );
+        break;
+      case ".":
+        pellets.push(
+          new Pellet({
+            position: {
+              x: Boundary.width * j + Boundary.width / 2,
+              y: Boundary.height * i + Boundary.height / 2,
+            },
+          })
+        );
+        break;
     }
   });
 });
@@ -358,23 +358,25 @@ function animate() {
   requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
 
-// touch pellets here
-for (let i = pellets.length -1; 0 < i; i--) {
-  const pellet = pellets[i]
+  // touch pellets here
+  for (let i = pellets.length - 1; 0 < i; i--) {
+    const pellet = pellets[i];
 
+    pellet.draw();
 
-  pellet.draw()
-
-  if (Math.hypot(
-    pellet.position.x - player.position.x,
-    pellet.position.y - player.position.y
-  ) < pellet.radius + player.radius) {
-    console.log('touching')
-    pellets.splice(i,1)
-    score += 10
-    scoreEl.innerHTML = score
+    if (
+      Math.hypot(
+        pellet.position.x - player.position.x,
+        pellet.position.y - player.position.y
+      ) <
+      pellet.radius + player.radius
+    ) {
+      console.log("touching");
+      pellets.splice(i, 1);
+      score += 10;
+      scoreEl.innerHTML = score;
+    }
   }
-}
 
   boundaries.forEach((boundary) => {
     boundary.draw();
@@ -394,13 +396,13 @@ for (let i = pellets.length -1; 0 < i; i--) {
   player.update();
   // player.velocity.y = 0;
   // player.velocity.x = 0;
-  ghosts.forEach(ghost => {
-    ghost.update()
+  ghosts.forEach((ghost) => {
+    ghost.update();
 
-    const collisions = []
-    boundaries.forEach(boundary => {
+    const collisions = [];
+    boundaries.forEach((boundary) => {
       if (
-        !collisions.includes('right') &&
+        !collisions.includes("right") &&
         circleCollidesWithRectangle({
           circle: {
             ...ghost,
@@ -412,74 +414,81 @@ for (let i = pellets.length -1; 0 < i; i--) {
           rectangle: boundary,
         })
       ) {
-         collisions.push('right')
+        collisions.push("right");
+      }
+
+      if (
+        !collisions.includes("left") &&
+        circleCollidesWithRectangle({
+          circle: {
+            ...ghost,
+            velocity: {
+              x: -5,
+              y: 0,
+            },
+          },
+          rectangle: boundary,
+        })
+      ) {
+        collisions.push("left");
+      }
+
+      if (
+        !collisions.includes("up") &&
+        circleCollidesWithRectangle({
+          circle: {
+            ...ghost,
+            velocity: {
+              x: 0,
+              y: -5,
+            },
+          },
+          rectangle: boundary,
+        })
+      ) {
+        collisions.push("up");
+      }
+
+      if (
+        !collisions.includes("down") &&
+        circleCollidesWithRectangle({
+          circle: {
+            ...ghost,
+            velocity: {
+              x: 0,
+              y: 5,
+            },
+          },
+          rectangle: boundary,
+        })
+      ) {
+        collisions.push("down");
+      }
+    });
+    if (collisions.length > ghost.prevCollisions.length) {
+      ghost.prevCollisions = collisions;
     }
 
-    if (
-      !collisions.includes('left') &&
-      circleCollidesWithRectangle({
-        circle: {
-          ...ghost,
-          velocity: {
-            x: -5,
-            y: 0,
-          },
-        },
-        rectangle: boundary,
-      })
-    ) {
-       collisions.push('left')
-  }
+    if (JSON.stringify(collisions) !== JSON.stringify(ghost.prevCollisions)) {
+      if (ghost.velocity.x > 0) {
+        ghost.prevCollisions.push("right");
+      } else if (ghost.velocity.x < 0) {
+        ghost.prevCollisions.push("left");
+      } else if (ghost.velocity.y < 0) {
+        ghost.prevCollisions.push("up");
+      } else if (ghost.velocity.x < 0) {
+        ghost.prevCollisions.push("down");
+      }
+    }
+    console.log(collisions);
 
-  if (
-    !collisions.includes('up') &&
-    circleCollidesWithRectangle({
-      circle: {
-        ...ghost,
-        velocity: {
-          x: 0,
-          y: -5,
-        },
-      },
-      rectangle: boundary,
-    })
-  ) {
-     collisions.push('up')
-}
+    const pathways = ghost.prevCollisions.filter((collision) => {
+      return !collisions.includes(collision);
+    });
+    console.log({ pathways });
 
-if (
-  !collisions.includes('down') &&
-  circleCollidesWithRectangle({
-    circle: {
-      ...ghost,
-      velocity: {
-        x: 0,
-        y: 5,
-      },
-    },
-    rectangle: boundary,
-  })
-) {
-   collisions.push('down')
-}
-  })
-  if (collisions.length > ghost.prevCollisions.length) {
-    ghost.prevCollisions = collisions
-  }
-
-  if (JSON.stringify(collisions) !== JSON.stringify(ghost.prevCollisions)) {
-    if (ghost.velocity.x > 0) {
-      ghost.prevCollisions.push('right')
-    }  else if (ghost.velocity.x < 0) {
-      ghost.prevCollisions.push('left') 
-    } else if (ghost.velocity.y < 0) {
-      ghost.prevCollisions.push('up') 
-  } else if (ghost.velocity.x < 0) {
-    ghost.prevCollisions.push('down') 
-}
-  }
-  console.log(collisions)
-  })
+    const direction = pathways[Math.floor(Math.random() * pathways.length)];
+  });
 
   if (keys.w.pressed && lastKey === "w") {
     for (let i = 0; i < boundaries.length; i++) {
