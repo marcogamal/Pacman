@@ -407,7 +407,7 @@ function animate() {
           circle: {
             ...ghost,
             velocity: {
-              x: 5,
+              x: ghost.speed,
               y: 0,
             },
           },
@@ -423,7 +423,7 @@ function animate() {
           circle: {
             ...ghost,
             velocity: {
-              x: -5,
+              x: -ghost.speed,
               y: 0,
             },
           },
@@ -440,7 +440,7 @@ function animate() {
             ...ghost,
             velocity: {
               x: 0,
-              y: -5,
+              y: -ghost.speed,
             },
           },
           rectangle: boundary,
@@ -456,7 +456,7 @@ function animate() {
             ...ghost,
             velocity: {
               x: 0,
-              y: 5,
+              y: ghost.speed,
             },
           },
           rectangle: boundary,
