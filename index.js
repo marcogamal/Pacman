@@ -46,12 +46,14 @@ class Player {
 }
 
 class Ghost {
+  static speed = 2
   constructor({ position, velocity, color = "red" }) {
     this.position = position;
     this.velocity = velocity;
     this.radius = 15;
     this.color = color;
     this.prevCollisions = [];
+    this.speed = 2;
   }
 
   draw() {
@@ -93,7 +95,7 @@ const ghosts = [
       y: Boundary.height + Boundary.height / 2,
     },
     velocity: {
-      x: 0,
+      x: Ghost.speed,
       y: 0,
     },
   }),
@@ -490,23 +492,23 @@ function animate() {
     const direction = pathways[Math.floor(Math.random() * pathways.length)];
     switch (direction) {
       case "down":
-        ghost.velocity.y = 5;
+        ghost.velocity.y = ghost.speed;
         ghost.velocity.x = 0;
         break;
 
       case "up":
-        ghost.velocity.y = -5;
+        ghost.velocity.y = -ghost.speed;
         ghost.velocity.x = 0;
         break;
 
       case "right":
         ghost.velocity.y = 0;
-        ghost.velocity.x = 0;
+        ghost.velocity.x = ghost.speed;
         break;
 
       case "left":
         ghost.velocity.y = 0;
-        ghost.velocity.x = 0;
+        ghost.velocity.x = -ghost.speed;
         break;
     }
     ghost.prevCollisions = [];
