@@ -46,7 +46,7 @@ class Player {
 }
 
 class Ghost {
-  static speed = 2
+  static speed = 2;
   constructor({ position, velocity, color = "red" }) {
     this.position = position;
     this.velocity = velocity;
