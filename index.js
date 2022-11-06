@@ -344,20 +344,22 @@ map.forEach((row, i) => {
 });
 
 function circleCollidesWithRectangle({ circle, rectangle }) {
+  const padding = Boundary.width /2 - circle.radius - 1
   return (
     circle.position.y - circle.radius + circle.velocity.y <=
-      rectangle.position.y + rectangle.height &&
+      rectangle.position.y + rectangle.height + padding &&
     circle.position.x + circle.radius + circle.velocity.x >=
-      rectangle.position.x &&
+      rectangle.position.x - padding &&
     circle.position.y + circle.radius + circle.velocity.y >=
-      rectangle.position.y &&
+      rectangle.position.y - padding &&
     circle.position.x - circle.radius + circle.velocity.x <=
-      rectangle.position.x + rectangle.width
+      rectangle.position.x + rectangle.width + padding
   );
 }
 
+let animationId
 function animate() {
-  requestAnimationFrame(animate);
+  animationId = requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
 
   // touch pellets here
@@ -400,6 +402,17 @@ function animate() {
   // player.velocity.x = 0;
   ghosts.forEach((ghost) => {
     ghost.update();
+
+    if (
+      Math.hypot(
+        ghost.position.x - ghost.position.x,
+        ghost.position.y - ghost.position.y
+      ) <
+      ghost.radius + player.radius
+    ) {
+        cancelAnimationFrame(animationId)
+        console.log('you lose')
+    }
 
     const collisions = [];
     boundaries.forEach((boundary) => {
