@@ -528,20 +528,15 @@ function animate() {
         collisions.push("down");
       }
     });
-    if (collisions.length > ghost.prevCollisions.length) {
+    if (collisions.length > ghost.prevCollisions.length) 
       ghost.prevCollisions = collisions;
-    }
+    
 
     if (JSON.stringify(collisions) !== JSON.stringify(ghost.prevCollisions)) {
-      if (ghost.velocity.x > 0) {
-        ghost.prevCollisions.push("right");
-      } else if (ghost.velocity.x < 0) {
-        ghost.prevCollisions.push("left");
-      } else if (ghost.velocity.y < 0) {
-        ghost.prevCollisions.push("up");
-      } else if (ghost.velocity.x < 0) {
-        ghost.prevCollisions.push("down");
-      }
+      if (ghost.velocity.x > 0) ghost.prevCollisions.push("right");
+      else if (ghost.velocity.x < 0)  ghost.prevCollisions.push("left");
+      else if (ghost.velocity.y < 0)  ghost.prevCollisions.push("up");
+      else if (ghost.velocity.x < 0)  ghost.prevCollisions.push("down");
     }
     console.log(collisions);
 
