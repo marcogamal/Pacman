@@ -446,8 +446,6 @@ function animate() {
   });
 
   player.update();
-  // player.velocity.y = 0;
-  // player.velocity.x = 0;
   ghosts.forEach((ghost) => {
     ghost.update();
 
