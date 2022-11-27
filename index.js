@@ -410,7 +410,6 @@ function animate() {
   animationId = requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
 
-  // touch pellets here
   for (let i = pellets.length - 1; 0 < i; i--) {
     const pellet = pellets[i];
 
